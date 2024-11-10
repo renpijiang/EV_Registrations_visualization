@@ -14,11 +14,16 @@ function main() {
     renderingWeb();
 }
 
-async function renderingWeb(){
+async function renderingWeb() {
 
-    await waitForDataLoad(()=>vehicleDataReady);
-    await waitForDataLoad(()=>geoDataReady);
+    await waitForDataLoad(() => vehicleDataReady);
+    await waitForDataLoad(() => geoDataReady);
     console.log("Start rendering web UI");
 
+    // 调用函数绘制折线图
+    // TODO:
+    //var stateName = readUserInput();
+    //drawLineGraph(loadLineGraphData(stateName), "svg", 800, 400);
+    drawLineGraph(loadLineGraphData("South Dakota"), "svg", 800, 400);
     drawBubbles();
 }

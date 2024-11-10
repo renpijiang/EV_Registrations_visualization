@@ -1,21 +1,13 @@
-// function loadLineGraphData() {
-//   const stateName = "Wyoming";  // 选择你想要的州
-//   const data = [];
-
-// }
-const data = [
-  { year: 2016, value: 72900 },
-  { year: 2017, value: 77400 },
-  { year: 2018, value: 80200 },
-  { year: 2019, value: 83500 },
-  { year: 2020, value: 86000 },
-  { year: 2021, value: 83200 },
-  { year: 2022, value: 86000 },
-  { year: 2023, value: 89200 }
-];
-
-// 调用函数绘制折线图
-drawLineGraph(data, "svg", 800, 400);
+function loadLineGraphData(stateName) {
+  const data = [];
+  for (let i = 1; i < yearScale.length; i++) {
+    let obj = {};
+    obj.year = yearScale[i];
+    obj.value = vehicleData[stateName][yearScale[i]];
+    data[i - 1] = obj;
+  }
+  return data;
+};
 
 function drawLineGraph(data, svgSelector, width, height) {
   // 选择 SVG 元素
@@ -47,7 +39,7 @@ function drawLineGraph(data, svgSelector, width, height) {
 
   // 设定 y 轴的范围（y轴）
   const y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.value)])
+    .domain(d3.extent(data, d => d.value))
     .range([innerHeight, 0]);
 
   // 使用 d3.line 生成器绘制路径

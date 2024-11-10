@@ -2,6 +2,7 @@
 //        VEHICLE DATA         //
 /////////////////////////////////
 
+var yearScale = [];
 var vehicleData = {};
 var vehicleDataReady = false;
 
@@ -14,18 +15,18 @@ function loadVehicleData() {
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-      const header = jsonData[0]; // first line is head
+      yearScale = jsonData[0]; // first line is head
       for (let i = 1; i < jsonData.length; i++) {
         const row = jsonData[i];
         const state = row[0]; // get name of state
         vehicleData[state] = {};
 
-        for (let j = 1; j < header.length; j++) {
-          const year = header[j]; // get year
+        for (let j = 1; j < yearScale.length; j++) {
+          const year = yearScale[j]; // get year
           vehicleData[state][year] = row[j]; // get the number of EV in the corresponding year
         }
       }
-      
+
       vehicleDataReady = true;
       console.log("Vehicle data was loaded successfully!");
     })
@@ -66,8 +67,8 @@ function loadGeoData() {
 
 
 
-function waitForDataLoad(conditionFunc){
-  return new Promise((resolve)=>{
+function waitForDataLoad(conditionFunc) {
+  return new Promise((resolve) => {
     const intervalId = setInterval(async () => {
       if (conditionFunc()) {
         clearInterval(intervalId);
