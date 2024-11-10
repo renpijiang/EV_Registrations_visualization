@@ -1,4 +1,9 @@
+/////////////////////////////////
+//        VEHICLE DATA         //
+/////////////////////////////////
+
 var vehicleData = {};
+var vehicleDataReady = false;
 
 // load vehicle data from sheets
 function loadVehicleData() {
@@ -20,9 +25,54 @@ function loadVehicleData() {
           vehicleData[state][year] = row[j]; // get the number of EV in the corresponding year
         }
       }
-      drawBubbles();
+      
+      vehicleDataReady = true;
+      console.log("Vehicle data was loaded successfully!");
     })
     .catch(error => {
       console.error("Error loading Excel file:", error);
     });
+}
+
+/////////////////////////////////
+//         GEO DATA            //
+/////////////////////////////////
+
+var usStateGeo = {}; // US states geo data
+var usCountyGeo = {}; // US countries geo data
+var geoDataReady = false;
+
+function loadGeoData() {
+  // load GeoJSON data
+  axios.get('/data/states_geo.json').then(response => {
+    var geojsonData = response.data;
+
+    // Filter out states in the USA
+    usStateGeo = {
+      "type": "FeatureCollection",
+      "features": geojsonData.features.filter(function (feature) {
+        return feature.properties.admin === "United States of America";
+      })
+    };
+
+    geoDataReady = true;
+    console.log("States geo data was loaded successfully!");
+  }).catch(error => {
+    console.error("Error loading GeoJSON:", error);
+  });
+}
+
+
+
+
+
+function waitForDataLoad(conditionFunc){
+  return new Promise((resolve)=>{
+    const intervalId = setInterval(async () => {
+      if (conditionFunc()) {
+        clearInterval(intervalId);
+        resolve();
+      }
+    }, 100);
+  })
 }
