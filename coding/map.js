@@ -30,7 +30,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // load Excel from Local server
-axios.get('/ev_data.xlsx', { responseType: 'arraybuffer' })
+axios.get('./data/ev_data.xlsx', { responseType: 'arraybuffer' })
   .then(response => {
     const data = new Uint8Array(response.data);
     const workbook = XLSX.read(data, { type: "array" });
@@ -53,7 +53,7 @@ axios.get('/ev_data.xlsx', { responseType: 'arraybuffer' })
     }
 
     // load GeoJSON data
-    axios.get('/coding/ne_10m_admin_1_states_provinces (1).json').then(response => {
+    axios.get('/data/states_geo.json').then(response => {
       var geojsonData = response.data;
 
       // Filter out states in the USA
