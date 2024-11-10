@@ -17,13 +17,6 @@ function drawBubbles() {
     // Initially add bubbles for the default year
     drawBubblesForYear(selectedYear, vehicleData);
 
-    // Monitor the change of year 
-    document.getElementById("yearSelect").addEventListener("change", function () {
-      if (this.value != selectedYear) {
-        selectedYear = this.value;
-        drawBubblesForYear(selectedYear, vehicleData);  // Update the bubbles based on the selected year
-      }
-    });
   } catch (error) {
     console.log(error);
   }

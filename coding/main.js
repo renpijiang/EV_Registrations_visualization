@@ -24,6 +24,8 @@ async function renderingWeb() {
     // TODO:
     //var stateName = readUserInput();
     //drawLineGraph(loadLineGraphData(stateName), "svg", 800, 400);
-    drawLineGraph(loadLineGraphData("South Dakota"), "svg", 800, 400);
+    drawLineGraph(loadLineGraphData("Utah"), "svg", 800, 400);
     drawBubbles();
+
+    registerUserInputMonitors();
 }

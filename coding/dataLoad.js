@@ -4,6 +4,38 @@
 
 var yearScale = [];
 var vehicleData = {};
+
+//vehicleData = {
+//    Washington = {
+//      2016 = {
+//          EV= 3000},
+//          PHEV = 3000},
+//          HEV = 3000},
+//          GAS = 3000},
+//      },
+//      2017 = {
+//          EV= 3000},
+//          PHEV = 3000},
+//          HEV = 3000},
+//          GAS = 3000},
+//      },
+//    },
+//    Utah = {
+//      2016 = {
+//          EV= 3000},
+//          PHEV = 3000},
+//          HEV = 3000},
+//          GAS = 3000},
+//      },
+//      2017 = {
+//          EV= 3000},
+//          PHEV = 3000},
+//          HEV = 3000},
+//          GAS = 3000},
+//      },
+//    },
+//}
+
 var vehicleDataReady = false;
 
 // load vehicle data from sheets

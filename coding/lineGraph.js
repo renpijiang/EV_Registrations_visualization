@@ -1,3 +1,10 @@
+// the data line graph use to draw
+//data = [
+//    { year: 2016, value: 50009},
+//    { year: 2017, value: 30009},
+//    { year: 2018, value: 60009},
+//]
+
 function loadLineGraphData(stateName) {
   const data = [];
   for (let i = 1; i < yearScale.length; i++) {
@@ -38,9 +45,11 @@ function drawLineGraph(data, svgSelector, width, height) {
     .range([0, innerWidth]);
 
   // 设定 y 轴的范围（y轴）
+  var min = d3.min(data, d => d.value);
+  var max = d3.max(data, d => d.value);
   const y = d3.scaleLinear()
-    .domain(d3.extent(data, d => d.value))
-    .range([innerHeight, 0]);
+    .domain([0, max])
+    .range([innerHeight,0]);
 
   // 使用 d3.line 生成器绘制路径
   const line = d3.line()
