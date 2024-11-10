@@ -8,11 +8,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <link rel="stylesheet" href="/coding/map.css">
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- 引入axios -->
   <script src="/coding/dataLoad.js"></script>
-  <script src="/coding/lineGraph.js"></script>
   <script src="/coding/map.js" defer></script> <!-- Ensure JS loads after HTML elements -->
 </head>
 
@@ -31,7 +30,12 @@
       <option value="2016">2016</option>
       <!-- hhhs -->
     </select>
-  </div>11
+  </div>
+
+  <svg width="800" height="400"></svg> <!-- 创建一个 SVG 容器 -->
+  <script src="/coding/lineGraph.js">
+  </script>
+
   <!-- Map container -->
   <div id="map"></div>
 
