@@ -111,9 +111,38 @@ function loadGeoData() {
   });
 }
 
+/////////////////////////////////
+//      POPULATION DATA        //
+/////////////////////////////////
+var populationData = {};
+var polulationDataReady = false;
 
+function loadPopulationData() {
+  axios.get('/data/population_data.xlsx', { responseType: 'arraybuffer' })
+    .then(response => {
+      const data = new Uint8Array(response.data);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
+      const header = jsonData[0];
+      for (let i = 1; i < jsonData.length; i++) {
+        const row = jsonData[i];
+        const state = row[0]; // get name of state
+        populationData[state] = {};
 
+        for (let j = 1; j <header.length; j++) {
+          const year = header[j]; // get year
+          populationData[state][year] = row[j];
+        }
+      }
+      polulationDataReady = true;
+      console.log("Population data was loaded successfully!");
+    })
+    .catch(error => {
+      console.error("Error loading Excel file:", error);
+    });
+}
 
 function waitForDataLoad(conditionFunc) {
   return new Promise((resolve) => {
