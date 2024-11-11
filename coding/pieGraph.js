@@ -1,4 +1,3 @@
-function drawPieGraph(stateName)
-{
-    // TODO: draw
+function drawPieGraph(stateName) {
+
 }

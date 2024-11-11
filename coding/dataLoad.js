@@ -4,7 +4,6 @@
 
 var yearScale = [];
 var vehicleData = {};
-
 //vehicleData = {
 //    Washington = {
 //      2016 = {
@@ -40,24 +39,40 @@ var vehicleDataReady = false;
 
 // load vehicle data from sheets
 function loadVehicleData() {
-  axios.get('./data/ev_data.xlsx', { responseType: 'arraybuffer' })
+  axios.get('/data/each_states_vehicle.xlsx', { responseType: 'arraybuffer' })
     .then(response => {
       const data = new Uint8Array(response.data);
       const workbook = XLSX.read(data, { type: "array" });
-      const sheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-      yearScale = jsonData[0]; // first line is head
-      for (let i = 1; i < jsonData.length; i++) {
-        const row = jsonData[i];
-        const state = row[0]; // get name of state
-        vehicleData[state] = {};
+      var yearIndex = 0;
+      // 遍历所有的 Sheet 表，每个表表示一个年份
+      workbook.SheetNames.forEach(sheetName => {
+        const sheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-        for (let j = 1; j < yearScale.length; j++) {
-          const year = yearScale[j]; // get year
-          vehicleData[state][year] = row[j]; // get the number of EV in the corresponding year
+        const year = sheetName;  // 将表名（比如2023，2022等）作为年份
+        yearScale[yearIndex] = sheetName;
+        yearIndex = yearIndex + 1;
+        const vehicleTypes = jsonData[0]; // 第一行是车辆类型（比如EV, PHEV, GAS等）
+
+        for (let i = 1; i < jsonData.length; i++) {
+          const row = jsonData[i];
+          const state = row[0]; // 每一行的第一个值是州名
+
+          if (!vehicleData[state]) { // 如果vehicleData还没有该州的数据，则初始化该州
+            vehicleData[state] = {};
+          }
+
+          if (!vehicleData[state][year]) { // 如果该州还没有该年的数据，初始化该年
+            vehicleData[state][year] = {};
+          }
+
+          for (let j = 1; j < vehicleTypes.length; j++) { // 从第二列开始遍历，第一列是州名
+            const vehicleType = vehicleTypes[j]; // 车辆类型（EV, PHEV, HEV, GAS等
+            vehicleData[state][year][vehicleType] = row[j]; // 将数据赋值到对应的州、年份、车辆类型下
+          }
         }
-      }
+      });
 
       vehicleDataReady = true;
       console.log("Vehicle data was loaded successfully!");
@@ -66,6 +81,7 @@ function loadVehicleData() {
       console.error("Error loading Excel file:", error);
     });
 }
+
 
 /////////////////////////////////
 //         GEO DATA            //

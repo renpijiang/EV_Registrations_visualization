@@ -1,5 +1,6 @@
 var map;
-
+var currentYear = 2023;
+var currentState = "Alabama";
 main();
 
 // website entrance
@@ -7,11 +8,14 @@ function main() {
 
     // Load data
     loadVehicleData();
+
     loadGeoData();
 
     initializeMap();
 
     renderingWeb();
+
+    registerUserInputMonitors();
 }
 
 async function renderingWeb() {
@@ -24,8 +28,7 @@ async function renderingWeb() {
     // TODO:
     //var stateName = readUserInput();
     //drawLineGraph(loadLineGraphData(stateName), "svg", 800, 400);
-    drawLineGraph(loadLineGraphData("Utah"), "svg", 800, 400);
+    drawLineGraph(loadLineGraphData(currentState, "EVT"), "svg", 800, 400);
     drawBubbles();
-
-    registerUserInputMonitors();
+    drawPieGraph();
 }

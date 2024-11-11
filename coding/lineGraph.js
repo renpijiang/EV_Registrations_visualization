@@ -5,13 +5,13 @@
 //    { year: 2018, value: 60009},
 //]
 
-function loadLineGraphData(stateName) {
+function loadLineGraphData(stateName, vehicleType) {
   const data = [];
-  for (let i = 1; i < yearScale.length; i++) {
+  for (let i = 0; i < yearScale.length; i++) {
     let obj = {};
     obj.year = yearScale[i];
-    obj.value = vehicleData[stateName][yearScale[i]];
-    data[i - 1] = obj;
+    obj.value = vehicleData[stateName][yearScale[i]][vehicleType];
+    data[i] = obj;
   }
   return data;
 };
@@ -49,7 +49,7 @@ function drawLineGraph(data, svgSelector, width, height) {
   var max = d3.max(data, d => d.value);
   const y = d3.scaleLinear()
     .domain([0, max])
-    .range([innerHeight,0]);
+    .range([innerHeight, 0]);
 
   // 使用 d3.line 生成器绘制路径
   const line = d3.line()

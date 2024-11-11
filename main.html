@@ -13,6 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- 引入axios -->
   <script src="/coding/dataLoad.js"></script>
   <script src="/coding/map.js" defer></script> <!-- Ensure JS loads after HTML elements -->
+  <script src="/coding/pieGraph.js" defer> </script>
   <script src="/coding/lineGraph.js" defer> </script>
   <script src="/coding/userInputMonitor.js" defer> </script>
   <script src="/coding/main.js" defer></script>
@@ -32,6 +33,14 @@
       <option value="2017">2017</option>
       <option value="2016">2016</option>
       <!-- hhhs -->
+    </select>
+  </div>
+
+  <!-- State Selection -->
+  <div class="state-selector">
+    <label for="stateSelect">Select State: </label>
+    <select id="stateSelect">
+      <!-- States will be populated dynamically -->
     </select>
   </div>
 

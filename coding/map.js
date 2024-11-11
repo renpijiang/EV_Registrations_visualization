@@ -12,11 +12,8 @@ function initializeMap() {
 
 function drawBubbles() {
   try {
-    // Default selected year
-    var selectedYear = 2023;
     // Initially add bubbles for the default year
-    drawBubblesForYear(selectedYear, vehicleData);
-
+    drawBubblesForYear(currentYear, vehicleData, "EVT");
   } catch (error) {
     console.log(error);
   }
@@ -24,7 +21,7 @@ function drawBubbles() {
 }
 
 // Function to add circle markers (bubbles) for each state
-function drawBubblesForYear(year, data) {
+function drawBubblesForYear(year, data, vehicleType) {
   // First clear existing layers if any
   if (map.bubblesLayer) {
     map.removeLayer(map.bubblesLayer);
@@ -35,7 +32,7 @@ function drawBubblesForYear(year, data) {
 
   usStateGeo.features.forEach(function (feature) {
     var stateName = feature.properties.name;
-    var evRegistrations = data[stateName] && data[stateName][year] || 0; // default 0
+    var evRegistrations = data[stateName] && data[stateName][year] && data[stateName][year][vehicleType] || 0; // default 0
 
     // Find the state's centroid or representative point
     var center = L.geoJson(feature).getBounds().getCenter();
