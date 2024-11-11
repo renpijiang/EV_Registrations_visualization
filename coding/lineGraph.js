@@ -10,7 +10,7 @@ function loadLineGraphData(stateName, vehicleType) {
   for (let i = 0; i < yearScale.length; i++) {
     let obj = {};
     obj.year = yearScale[i];
-    obj.value = vehicleData[stateName][yearScale[i]][vehicleType];
+    obj.value = vehicleData[stateName][yearScale[i]][vehicleType] / populationData[stateName][yearScale[i]] * 1000;
     data[i] = obj;
   }
   return data;
@@ -21,7 +21,7 @@ function drawLineGraph(data, svgSelector, width, height) {
   const svg = d3.select(svgSelector);
 
   // 设置边距
-  const margin = { top: 20, right: 30, bottom: 40, left: 40 };
+  const margin = { top: 20, right: 30, bottom: 40, left: 100 };
 
   // 计算内容区域的宽度和高度
   const innerWidth = width - margin.left - margin.right;
@@ -45,10 +45,9 @@ function drawLineGraph(data, svgSelector, width, height) {
     .range([0, innerWidth]);
 
   // 设定 y 轴的范围（y轴）
-  var min = d3.min(data, d => d.value);
   var max = d3.max(data, d => d.value);
   const y = d3.scaleLinear()
-    .domain([0, max])
+    .domain([0, 200])
     .range([innerHeight, 0]);
 
   // 使用 d3.line 生成器绘制路径
@@ -63,7 +62,7 @@ function drawLineGraph(data, svgSelector, width, height) {
     .attr("d", line)
     .style("fill", "none")
     .style("stroke", "steelblue")
-    .style("stroke-width", 2);
+    .style("stroke-width", 5);
 
   // 绘制 x 轴
   g.append("g")
@@ -77,7 +76,10 @@ function drawLineGraph(data, svgSelector, width, height) {
   // 绘制 y 轴
   g.append("g")
     .attr("class", "y axis")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y)
+    .ticks(12)   // 保证刻度和年份一致
+    .tickFormat(d3.format("d")) // 保证刻度为整数
+    );
 }
 
 

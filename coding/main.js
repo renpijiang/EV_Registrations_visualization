@@ -1,6 +1,7 @@
 var map;
 var currentYear = 2023;
 var currentState = "Alabama";
+
 main();
 
 // website entrance
@@ -8,8 +9,8 @@ function main() {
 
     // Load data
     loadVehicleData();
-
     loadGeoData();
+    loadPopulationData();
 
     initializeMap();
 
