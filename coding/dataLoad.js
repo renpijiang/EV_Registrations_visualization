@@ -4,6 +4,7 @@
 
 var yearScale = [];
 var vehicleData = {};
+var vehicleType = [];
 //vehicleData = {
 //    Washington = {
 //      2016 = {
@@ -54,6 +55,7 @@ function loadVehicleData() {
         yearScale[yearIndex] = sheetName;
         yearIndex = yearIndex + 1;
         const vehicleTypes = jsonData[0]; // 第一行是车辆类型（比如EV, PHEV, GAS等）
+        vehicleType = vehicleTypes.slice(1); // 第一列是州名，所以跳过它
 
         for (let i = 1; i < jsonData.length; i++) {
           const row = jsonData[i];

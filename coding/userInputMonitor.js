@@ -4,12 +4,12 @@ async function registerUserInputMonitors() {
   await waitForDataLoad(() => geoDataReady);
   console.log("Start registering user input monitors.");
 
-  rergisterYearMonitor();
+  registerYearMonitor();
   registerStateMonitor();
 }
 
 // Monitor the change of year 
-function rergisterYearMonitor() {
+function registerYearMonitor() {
   document.getElementById("yearSelect").addEventListener("change", function () {
     if (this.value != currentYear) {
       currentYear = this.value;

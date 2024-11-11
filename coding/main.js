@@ -30,5 +30,5 @@ async function renderingWeb() {
     //drawLineGraph(loadLineGraphData(stateName), "svg", 800, 400);
     drawLineGraph(loadLineGraphData(currentState, "EVT"), "svg", 800, 400);
     drawBubbles();
-    drawPieGraph();
+    drawPieGraph(loadPieGraphData(currentState, currentYear), "svg", 800, 400);
 }
