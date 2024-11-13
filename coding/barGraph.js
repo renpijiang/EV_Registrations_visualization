@@ -49,7 +49,7 @@ function drawBarGraph(data, svgSelector, width, height) {
   // 颜色映射
   const color = d3.scaleOrdinal()
     .domain(["GAS", "EV"])
-    .range(["#ff0000", "#0000ff"]);
+    .range(["#FF6666", "#66FF66"]);
 
   // 绘制柱子
   data.forEach(d => {
