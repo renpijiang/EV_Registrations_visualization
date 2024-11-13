@@ -133,7 +133,7 @@ function loadPopulationData() {
         const state = row[0]; // get name of state
         populationData[state] = {};
 
-        for (let j = 1; j <header.length; j++) {
+        for (let j = 1; j < header.length; j++) {
           const year = header[j]; // get year
           populationData[state][year] = row[j];
         }

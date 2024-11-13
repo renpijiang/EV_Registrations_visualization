@@ -43,14 +43,15 @@ function drawBubblesForYear(year, data, vehicleType) {
     // Find the state's centroid or representative point
     var center = L.geoJson(feature).getBounds().getCenter();
 
-    // Add a circle marker (bubble)
+    // Add a circle marker (bubble)   
+    // color 是ev的占比  radius 是汽车数量
     L.circleMarker(center, {
       radius: getRadius(evRegistrations),  // Size of the bubble
-      fillColor: getColor(evRegistrations/totalRegistrations),  // Color based on EV numbers
+      fillColor: getColor(evRegistrations / totalRegistrations),  // Color based on EV numbers
       color: "none",  // Optional border color
       weight: 1,
       fillOpacity: 0.7
-    }).bindPopup(`<strong>${stateName}</strong><br>EV Registration Counts: ${evRegistrations}</strong><br>Percent: ${evRegistrations/totalRegistrations}`).addTo(map.bubblesLayer);
+    }).bindPopup(`<strong>${stateName}</strong><br>EV Registration Counts: ${evRegistrations}</strong><br>Percent: ${evRegistrations / totalRegistrations}`).addTo(map.bubblesLayer);
   });
 }
 
@@ -60,17 +61,17 @@ function getColor(d) {
     d > 0.13 ? '#BD0026' :
       d > 0.12 ? '#E31A1C' :
         d > 0.11 ? '#FC4E2A' :
-          d > 0.10 ? '#FD8D3C':
+          d > 0.10 ? '#FD8D3C' :
             '#FFEDA0';
 }
 
 // get bubble size according to amount of EV
 function getRadius(d) {
   let radius = d > 5000000 ? 50 :
-  d > 4000000 ? 45 :
-    d > 3000000 ? 40 :
-      d > 2000000 ? 35 :
-        d > 1000000 ? 30 :
-          20; 
-  return  radius;// Minimum size
+    d > 4000000 ? 45 :
+      d > 3000000 ? 40 :
+        d > 2000000 ? 35 :
+          d > 1000000 ? 30 :
+            20;
+  return radius;// Minimum size
 }

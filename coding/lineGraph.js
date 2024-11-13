@@ -10,7 +10,7 @@ function loadLineGraphData(stateName, vehicleType) {
   for (let i = 0; i < yearScale.length; i++) {
     let obj = {};
     obj.year = yearScale[i];
-    obj.value = vehicleData[stateName][yearScale[i]][vehicleType] / populationData[stateName][yearScale[i]] * 1000;
+    obj.value = vehicleData[stateName][yearScale[i]][vehicleType] / populationData[stateName][yearScale[i]] * 1000;//每一千人拥有车数量
     data[i] = obj;
   }
   return data;
@@ -19,9 +19,10 @@ function loadLineGraphData(stateName, vehicleType) {
 function drawLineGraph(data, svgSelector, width, height) {
   // 选择 SVG 元素
   const svg = d3.select(svgSelector);
+  svg.attr("viewBox", `0 0 ${width} ${height}`);
 
   // 设置边距
-  const margin = { top: 20, right: 30, bottom: 40, left: 100 };
+  const margin = { top: 20, right: 30, bottom: 20, left: 30 };
 
   // 计算内容区域的宽度和高度
   const innerWidth = width - margin.left - margin.right;
@@ -77,8 +78,8 @@ function drawLineGraph(data, svgSelector, width, height) {
   g.append("g")
     .attr("class", "y axis")
     .call(d3.axisLeft(y)
-    .ticks(12)   // 保证刻度和年份一致
-    .tickFormat(d3.format("d")) // 保证刻度为整数
+      .ticks(12)   // 保证刻度和年份一致
+      .tickFormat(d3.format("d")) // 保证刻度为整数
     );
 }
 

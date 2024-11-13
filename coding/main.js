@@ -28,8 +28,9 @@ async function renderingWeb() {
     // 调用函数绘制折线图
     // TODO:
     //var stateName = readUserInput();
-    //drawLineGraph(loadLineGraphData(stateName), "svg", 800, 400);
-    drawLineGraph(loadLineGraphData(currentState, "EVT"), "svg", 800, 400);
+
+    drawLineGraph(loadLineGraphData(currentState, "EVT"), "#lineGraph", 400, 400);
     drawBubbles();
-    drawPieGraph(loadPieGraphData(currentState, currentYear), "svg", 800, 400);
+    drawPieGraph(loadPieGraphData(currentState, currentYear), "#pieGraph", 400, 400);
+    drawBarGraph(loadBarGraphData(currentYear), "#barGraph", 400, 800);
 }

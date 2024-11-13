@@ -14,6 +14,7 @@ function registerYearMonitor() {
     if (this.value != currentYear) {
       currentYear = this.value;
       drawBubblesForYear(currentYear, vehicleData, "EVT");  // Update the bubbles based on the selected year
+      drawBarGraph(loadBarGraphData(), "#barGraph", 400, 800);
     }
   });
 }
@@ -34,10 +35,12 @@ function registerStateMonitor() {
     option.textContent = state;
     stateSelect.appendChild(option);
   });
+
   document.getElementById("stateSelect").addEventListener("change", function () {
     if (this.value != currentState) {
       currentState = this.value;
-      drawLineGraph(loadLineGraphData(currentState, "EVT"), "svg", 800, 400);
+      drawLineGraph(loadLineGraphData(currentState, "EVT"), "#lineGraph", 400, 400);
+      drawPieGraph(loadPieGraphData(currentState, currentYear), "#pieGraph", 400, 400);
     }
   });
 }
