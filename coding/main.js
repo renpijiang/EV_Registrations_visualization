@@ -32,5 +32,5 @@ async function renderingWeb() {
     drawLineGraph(loadLineGraphData(currentState, "EVT"), "#lineGraph", 400, 400);
     drawBubbles();
     drawPieGraph(loadPieGraphData(currentState, currentYear), "#pieGraph", 400, 400);
-    drawBarGraph(loadBarGraphData(currentYear), "#barGraph", 400, 840);
+    drawBarGraph(loadBarGraphData(currentYear), "#barGraph", 400, 800);
 }

@@ -14,7 +14,8 @@ function registerYearMonitor() {
     if (this.value != currentYear) {
       currentYear = this.value;
       drawBubblesForYear(currentYear, vehicleData, "EVT");  // Update the bubbles based on the selected year
-      drawBarGraph(loadBarGraphData(), "#barGraph", 400, 840);
+      drawBarGraph(loadBarGraphData(), "#barGraph", 400, 800);
+      drawPieGraph(loadPieGraphData(currentState, currentYear), "#pieGraph", 400, 400);
     }
   });
 }

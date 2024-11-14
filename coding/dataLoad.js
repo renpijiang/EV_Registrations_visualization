@@ -54,14 +54,14 @@ function loadVehicleData() {
         const year = sheetName;  // 将表名（比如2023，2022等）作为年份
         yearScale[yearIndex] = sheetName;
         yearIndex = yearIndex + 1;
-        const vehicleTypes = jsonData[0]; // 第一行是车辆类型（比如EV, PHEV, GAS等）
-        vehicleType = vehicleTypes.slice(1); // 第一列是州名，所以跳过它
+        const vehicleTypes = jsonData[0]; // 第一行是车辆类型
+        vehicleType = vehicleTypes.slice(1); // 第一列是州名 tiaoguo
 
         for (let i = 1; i < jsonData.length; i++) {
           const row = jsonData[i];
           const state = row[0]; // 每一行的第一个值是州名
 
-          if (!vehicleData[state]) { // 如果vehicleData还没有该州的数据，则初始化该州
+          if (!vehicleData[state]) { // 如果没有该州的数据，则初始化该州
             vehicleData[state] = {};
           }
 

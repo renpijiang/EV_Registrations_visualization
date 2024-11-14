@@ -10,57 +10,91 @@
 #map {
   height: 880px;
   width: 100%;
+  z-index: 1;
 }
 
 /* 顶部 */
 .shortcut {
-  height: 50px;
-  background: #f1f1f1;
+  height: 60px;
+  background: #ffffff;
   line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid black;
 }
 
 .selector {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
   margin: 10px;
   padding: 5px;
+}
+
+#yearSelect {
+  margin-right: 200px;
+  /* 两个选择器之间的间距 */
 }
 
 /* 中间 */
 
 .middle{
+  position: relative;
   display: flex;
-  background-color: rgb(148, 111, 111);
+  background-color: transparent;
   width: 100%;
   height: 880px;
 }
 .container {
   position: relative;
-  background: #575555;
+  background: transparent;
   width: 420px;
   height: 880px;
 }
+#pietitle,
+#linetitle,
+#bartitle {
+  font-family: Arial, sans-serif;
+  /* 设置字体类型 */
+  font-size: 15px;
+  /* 设置字体大小 */
+  font-weight: bold;
+  /* 设置字体加粗 */
+  color: #000000;
+  /* 设置字体颜色 */
+  text-align: center;
+  /* 让文字居中对齐 */
+  padding: 10px;
+  /* 添加一些内边距，确保文本不紧贴边缘 */
+}
+
 .pie-graph-container {
-  background-color: #1eff0a;
-  width: 400px;
+  background-color: transparent;
+  width: 390px;
   height: 400px;
   display: flex;   /* 确保内容居中对齐 */
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid rgb(58, 57, 57);
 }
 #pieGraph {
-  background: #c40d0d;
-  width: 90%; 
-  height: 90%;
+  background: transparent;
+  width: 100%; 
+  height: 100%;
 }
+
 .line-graph-container {
-  background-color: #a73030;
+  background-color:transparent;
   width: 400px;
   height: 400px;
-  display: flex;   /* 确保内容居中对齐 */
+  display: flex;  
   justify-content: center;
   align-items: center;
 }
 #lineGraph{
- background-color: #5c0eec;
+ background-color: transparent;
  width: 90%;
  height: 90%;
 }
@@ -68,16 +102,75 @@
 .mapbox{
   width: 100%;
   height: 880px;
-  background-color: #141b1b;
+  background-color: transparent;
 }
+
+#maptitle {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-family: "Arial", sans-serif;
+  background-color: transparent;
+  color: #000;
+  padding: 10px;
+  font-size: 24px;
+}
+
 
 .barbox{
   width: 400px;
+  background-color: transparent;
   /* height: 680px; */
 }
 
-.bartitle{
+/* 缩略图地图的容器样式 */
+/* .insetmap {
+  position: absolute;
+  bottom: 20px;
+  left: 400px;
+  width: 200px;
+  height: 150px;
+  background-color: transparent;
+  z-index: 10;
+  border: 2px solid #000;
+}
+ */
+
+.legend {
   width: 400px;
-  height: 200px;
-  background-color: #eee133;
+  height: 100px;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: 40px; /* 设置图例之间的间距 */
+}
+
+.color-box {
+  width: 100px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.gas {
+  background-color: rgb(58, 233, 110);
+}
+
+.ev {
+  background-color: rgb(224, 82, 82);
+}
+
+span {
+  color: rgb(2, 0, 0);
+  font-size: 16px;
 }

@@ -24,25 +24,25 @@
   <!-- 顶部start -->
   <div class="shortcut">
     <!-- Year Selection -->
-    <div class="fl">
-      <div class="selector">
-        <label for="yearSelect">Select Year: </label>
-        <select id="yearSelect">
-          <option value="2023">2023</option>
-          <option value="2022">2022</option>
-          <option value="2021">2021</option>
-          <option value="2020">2020</option>
-          <option value="2019">2019</option>
-          <option value="2018">2018</option>
-          <option value="2017">2017</option>
-          <option value="2016">2016</option>
-        </select>
-        <label for="stateSelect">Select State: </label>
-        <select id="stateSelect">
-          <!-- States will be populated dynamically -->
-        </select>
-      </div>
+    <!-- <div class="fl"> -->
+    <div class="selector">
+      <label for="yearSelect">Select Year: </label>
+      <select id="yearSelect">
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+      </select>
+      <label for="stateSelect">Select State: </label>
+      <select id="stateSelect">
+        <!-- States will be populated dynamically -->
+      </select>
     </div>
+    <!-- </div> -->
   </div>
   <!-- 顶部end -->
 
@@ -50,33 +50,41 @@
   <div class="middle">
     <!-- 饼图 -->
     <div class="container">
-
+      <div id="pietitle">The proportion of various types of new energy vehicles</div>
       <div class="pie-graph-container">
         <svg id="pieGraph"></svg>
       </div>
-
+      <div id="linetitle">Number of electric vehicles per 1,000
+        people</div>
       <div class="line-graph-container">
         <svg id="lineGraph"></svg>
       </div>
     </div>
 
+    <!-- 地图 -->
     <div class="mapbox">
+      <div id="maptitle">U.S. Vehicle Composition by Energy Types,2016-2023
+      </div>
       <div id="map"></div>
+
+      <!-- 缩略图地图（显示阿拉斯加和夏威夷） -->
+      <!-- <div id="insetMap" class="insetmap"></div> -->
     </div>
 
+    <!-- 柱状图 -->
     <div class="barbox">
-      <div id="bartitle">Number of Registered Vehicles per 1,000 People by U.S. State</div>
+      <div id="bartitle">Number of Registered Vehicles per 1,000 People</div>
       <svg id="barGraph"></svg>
+      <div id="legend">
+        <div class="legend-item fl">
+          <div class="color-box gas"></div> <span>EV</span>
+        </div>
+        <div class="legend-item fr">
+          <div class="color-box ev"></div> <span>Gas</span>
+        </div>
+      </div>
     </div>
-  </div>
-  <!-- 中间end -->
-
-  <!-- 添加Inset map -->
-  <div id="map"></div>
-  <div id="insetMap" style="position: absolute; bottom: 10px; left: 10px; width: 200px; height: 200px;"></div>
-
-
-  <!-- Map container -->
+    <!-- 中间end -->
 
 
 </body>

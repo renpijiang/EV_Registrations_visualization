@@ -9,6 +9,10 @@ function initializeMap() {
       touchZoom: false, // 禁用触摸缩放
     }).setView([37.8, -96], 4);  // set the initial view of the map
   }
+  // Add zoom control
+  L.control.zoom({
+    position: 'topright' // This puts the zoom control in the top-right corner
+  }).addTo(map);
 
   // add map layer
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

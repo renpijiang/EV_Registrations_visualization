@@ -8,13 +8,20 @@
 
 function loadPieGraphData(stateName, yearScale) {
     const data = [];
-    for (let i = 1; i < vehicleType.length - 4; i++) {
-        let obj = {}
+    let obj = {}
+    obj.vehicleType = "Other";
+    obj.value = 0;
+    data[0] = obj;
+    for (let i = 1; i < vehicleType.length - 5; i++) {
+        obj = {}
         obj.vehicleType = vehicleType[i];
         obj.value = vehicleData[stateName][yearScale][vehicleType[i]];
-        if (obj.value == 0)
-            continue;
-        data.push(obj); // 使用 push() 来添加到 data 数组
+        if (obj.value / vehicleData[stateName][yearScale]["EVT"] < 0.05) {
+            data[0].value = data[0].value + obj.value;
+        }
+        else {
+            data.push(obj); // 使用 push() 来添加到 data 数组
+        }
     }
     return data;
 };
@@ -28,20 +35,20 @@ function drawPieGraph(data, svgSelector, width, height) {
         .attr("viewBox", `0 0 ${width} ${height}`);  // 设置 viewBox
 
     // 更新半径计算，确保它根据 svg 容器的大小来计算
-    const margin = { top: 0, right: 0, bottom: 0, left: 0 };
-    const radius = Math.min(width, height) / 2;
+    const margin = { top: 100, right: 100, bottom: 100, left: 100 };
+    const radius = Math.min(width - margin.right - margin.left, height - margin.top - margin.bottom) / 2;
 
-    // 清空之前的内容（如果有）
+    // 清空之前的内容
     svg.selectAll("*").remove();
 
     // 创建一个组元素，居中饼状图
     const g = svg.append("g")
         .attr("transform", `translate(${width / 2},${height / 2})`);
 
-    // 选择一个更合适的颜色方案，如 d3.schemeSet3
+    // 选一个颜色
     const color = d3.scaleOrdinal()
-        .domain(data.map(d => d.vehicleType))  // 确保映射到车辆类型
-        .range(d3.schemeSet3);  // 或者选择更大的颜色范围，如 d3.schemeCategory20
+        .domain(data.map(d => d.vehicleType))  // 映射到车辆类型
+        .range(d3.schemeSet3);
 
 
     // 创建饼图生成器
@@ -69,7 +76,7 @@ function drawPieGraph(data, svgSelector, width, height) {
     arcs.append("text")
         .attr("transform", d => {
             const centroid = arc.centroid(d);
-            return `translate(${centroid[0] * 1.6},${centroid[1] * 1.6})`;
+            return `translate(${centroid[0] * 2.5},${centroid[1] * 2.5})`;
         })
         .attr("text-anchor", "middle")
         .attr("font-size", "12px")
