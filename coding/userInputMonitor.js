@@ -24,9 +24,9 @@ function registerYearMonitor() {
 // Monitor the change of state selection
 function registerStateMonitor() {
   const stateSelect = document.getElementById('stateSelect');
-  stateSelect.innerHTML = ''; // 清空现有选项
+  stateSelect.innerHTML = '';
 
-  // 从 vehicleData 获取所有州名
+  // get the states from vehicleData 
   const states = Object.keys(vehicleData);
 
   // Populate the state selector with states

@@ -3,10 +3,10 @@ function initializeMap() {
   if (!map) {
     map = L.map('map', {
       zoomControl: false,
-      scrollWheelZoom: false, // 禁用滚轮缩放
-      doubleClickZoom: false, // 禁用双击缩放
-      boxZoom: false, // 禁用框选缩放
-      touchZoom: false, // 禁用触摸缩放
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false,
+      touchZoom: false,
     }).setView([37.8, -96], 4);  // set the initial view of the map
   }
   // Add zoom control
@@ -47,8 +47,8 @@ function drawBubblesForYear(year, data, vehicleType) {
     // Find the state's centroid or representative point
     var center = L.geoJson(feature).getBounds().getCenter();
 
-    // Add a circle marker (bubble)   
-    // color 是ev的占比  radius 是汽车数量
+    // Add a circle marker (bubble)
+    // color represent the EV proportion  radius represent the quantity
     L.circleMarker(center, {
       radius: getRadius(evRegistrations),  // Size of the bubble
       fillColor: getColor(evRegistrations / totalRegistrations),  // Color based on EV numbers

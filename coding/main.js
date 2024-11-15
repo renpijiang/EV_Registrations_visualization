@@ -25,10 +25,6 @@ async function renderingWeb() {
     await waitForDataLoad(() => geoDataReady);
     console.log("Start rendering web UI");
 
-    // 调用函数绘制折线图
-    // TODO:
-    //var stateName = readUserInput();
-
     drawLineGraph(loadLineGraphData(currentState, "EVT"), "#lineGraph", 400, 400);
     drawBubbles();
     drawPieGraph(loadPieGraphData(currentState, currentYear), "#pieGraph", 400, 400);

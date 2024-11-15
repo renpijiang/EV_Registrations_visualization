@@ -1,4 +1,4 @@
-/* 公共样式 */
+/* common style */
 .fl{
   float: left;
 }
@@ -6,14 +6,14 @@
   float: right;
 }
 
-/* 地图 */
+/* map */
 #map {
   height: 880px;
   width: 100%;
   z-index: 1;
 }
 
-/* 顶部 */
+/* shortcut */
 .shortcut {
   height: 60px;
   background: #ffffff;
@@ -35,10 +35,9 @@
 
 #yearSelect {
   margin-right: 200px;
-  /* 两个选择器之间的间距 */
 }
 
-/* 中间 */
+/* middle */
 
 .middle{
   position: relative;
@@ -57,24 +56,19 @@
 #linetitle,
 #bartitle {
   font-family: Arial, sans-serif;
-  /* 设置字体类型 */
   font-size: 15px;
-  /* 设置字体大小 */
   font-weight: bold;
-  /* 设置字体加粗 */
   color: #000000;
-  /* 设置字体颜色 */
   text-align: center;
-  /* 让文字居中对齐 */
   padding: 10px;
-  /* 添加一些内边距，确保文本不紧贴边缘 */
+
 }
 
 .pie-graph-container {
   background-color: transparent;
   width: 390px;
   height: 400px;
-  display: flex;   /* 确保内容居中对齐 */
+  display: flex;   
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgb(58, 57, 57);
@@ -126,7 +120,6 @@
   /* height: 680px; */
 }
 
-/* 缩略图地图的容器样式 */
 /* .insetmap {
   position: absolute;
   bottom: 20px;
@@ -153,7 +146,7 @@
   display: flex;
   align-items: center;
   margin-right: 20px;
-  margin-left: 40px; /* 设置图例之间的间距 */
+  margin-left: 40px; 
 }
 
 .color-box {

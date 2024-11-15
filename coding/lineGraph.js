@@ -17,71 +17,95 @@ function loadLineGraphData(stateName, vehicleType) {
 };
 
 function drawLineGraph(data, svgSelector, width, height) {
-  // 选择 SVG 元素
+  //  SVG 
   const svg = d3.select(svgSelector);
   svg.attr("viewBox", `0 0 ${width} ${height}`);
 
-  // 设置边距
   const margin = { top: 20, right: 30, bottom: 20, left: 30 };
 
-  // 计算内容区域的宽度和高度
+  // Calculate the width and height of the area
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  // 清空之前的内容（如果有）
+  // clear previous content
   svg.selectAll("*").remove();
 
-  // 添加一个组元素并考虑边距
   const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-  // 将字符串日期转换为日期对象，将数值转为数字
+  // string into date
   data.forEach(d => {
     d.year = +d.year;
     d.value = +d.value;
   });
 
-  // 设定时间轴的范围（x轴）
+  // x axis range
   const x = d3.scaleLinear()
     .domain(d3.extent(data, d => d.year))
     .range([0, innerWidth]);
 
-  // 设定 y 轴的范围（y轴）
+  //  y axis range
   var max = d3.max(data, d => d.value);
   const y = d3.scaleLinear()
     .domain([0, 200])
     .range([innerHeight, 0]);
 
-  // 使用 d3.line 生成器绘制路径
+  //  d3.line path
   const line = d3.line()
     .x(d => x(d.year))
     .y(d => y(d.value));
 
-  // 绘制线条路径
+  // line path
   g.append("path")
     .data([data])
     .attr("class", "line")
     .attr("d", line)
     .style("fill", "none")
-    .style("stroke", "steelblue")
-    .style("stroke-width", 5);
+    .style("stroke", "black")
+    .style("stroke-width", 2);
 
-  // 绘制 x 轴
-  g.append("g")
+  g.selectAll(".dot")
+    .data(data)
+    .enter().append("circle")
+    .attr("class", "dot")
+    .attr("cx", d => x(d.year))
+    .attr("cy", d => y(d.value))
+    .attr("r", 4)  // dot radius
+    .style("fill", "black");
+
+  const xAxis = g.append("g")
     .attr("class", "x axis")
     .attr("transform", `translate(0,${innerHeight})`)
     .call(d3.axisBottom(x)
-      .ticks(data.length)   // 保证刻度和年份一致
-      .tickFormat(d3.format("d")) // 保证刻度为整数
+      .ticks(data.length)   // keep the year and scale
+      .tickFormat(d3.format("d")) // keep the scale is integer
     );
 
-  // 绘制 y 轴
-  g.append("g")
+  //  X line
+  xAxis.selectAll("path")
+    .style("stroke-width", "1.5");
+
+  //  X axis font
+  xAxis.selectAll("text")
+    .style("font-size", "14px")
+    .style("font-family", "Arial")
+    .style("font-weight", "bold")
+    .style("fill", "black");
+
+  // y axis
+  const yAxis = g.append("g")
     .attr("class", "y axis")
     .call(d3.axisLeft(y)
-      .ticks(12)   // 保证刻度和年份一致
-      .tickFormat(d3.format("d")) // 保证刻度为整数
+      .ticks(12)
+      .tickFormat(d3.format("d"))
     );
+
+  yAxis.selectAll("path")
+    .style("stroke-width", "1.5");
+
+  //  Y axis font
+  yAxis.selectAll("text")
+    .style("font-size", "14px")
+    .style("font-family", "Arial")
+    .style("font-weight", "bold")
+    .style("fill", "black");
 }
-
-
-

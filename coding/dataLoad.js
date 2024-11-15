@@ -46,32 +46,31 @@ function loadVehicleData() {
       const workbook = XLSX.read(data, { type: "array" });
 
       var yearIndex = 0;
-      // 遍历所有的 Sheet 表，每个表表示一个年份
       workbook.SheetNames.forEach(sheetName => {
         const sheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-        const year = sheetName;  // 将表名（比如2023，2022等）作为年份
+        const year = sheetName;
         yearScale[yearIndex] = sheetName;
         yearIndex = yearIndex + 1;
-        const vehicleTypes = jsonData[0]; // 第一行是车辆类型
-        vehicleType = vehicleTypes.slice(1); // 第一列是州名 tiaoguo
+        const vehicleTypes = jsonData[0];
+        vehicleType = vehicleTypes.slice(1);
 
         for (let i = 1; i < jsonData.length; i++) {
           const row = jsonData[i];
-          const state = row[0]; // 每一行的第一个值是州名
+          const state = row[0];
 
-          if (!vehicleData[state]) { // 如果没有该州的数据，则初始化该州
+          if (!vehicleData[state]) {
             vehicleData[state] = {};
           }
 
-          if (!vehicleData[state][year]) { // 如果该州还没有该年的数据，初始化该年
+          if (!vehicleData[state][year]) {
             vehicleData[state][year] = {};
           }
 
-          for (let j = 1; j < vehicleTypes.length; j++) { // 从第二列开始遍历，第一列是州名
-            const vehicleType = vehicleTypes[j]; // 车辆类型（EV, PHEV, HEV, GAS等
-            vehicleData[state][year][vehicleType] = row[j]; // 将数据赋值到对应的州、年份、车辆类型下
+          for (let j = 1; j < vehicleTypes.length; j++) {
+            const vehicleType = vehicleTypes[j];
+            vehicleData[state][year][vehicleType] = row[j];
           }
         }
       });
